@@ -13,7 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require bootstrap
 //= require bootstrap-sprockets
 //= require moment
 //= require bootstrap-datetimepicker
+//= require bootstrap-datepicker.min.js
+//= require jquery.slimscroll.min
+//= require dropdown.js
 //= require_tree .

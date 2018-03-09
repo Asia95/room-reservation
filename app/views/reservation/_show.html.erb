@@ -1,24 +1,26 @@
 <h1>Reservations</h1>
 <% @reservations.each do |reserv| %>
   <div class="row justify-content-md-center align-items-center">
-    <div class="col-1">
-      1 of 3
-    </div>
     
+    <form class="form-inline">
     <div class="col-10">
       <div class="row">
         <div class="col-2">
-          <%= reserv.room.name %>
+          Room: <%= reserv.room.name %>
         </div>
         <div class="col-2">
-          <%= reserv.room.capacity %>
+          Capacity: <%= reserv.room.capacity %>
+        </div>
+        <div class="col-2">
+          Reserved From: <%= reserv.start_date %>
+        </div>
+        <div class="col-2">
+          To: <%= reserv.end_date %>
         </div>
       </div>
     </div>
     
-    <div class="col-1">
-      3 of 3
-    </div>
+    </form>
   </div>
 <% end %>
 

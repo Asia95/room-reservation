@@ -9,15 +9,20 @@
     <%= stylesheet_link_tag href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" %>
   </head>
 
-  <body class="fixed skin-blue-light">
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <div class="wrapper">
-      <%#= render 'layouts/navigation/layout'%>
+  <body class="sidebar-collapse skin-blue-light">
+    <div class="wrapper">  
+      <%= render 'layouts/navigation/layout'%>    
       <div class="content-wrapper">
-        <%= yield %>
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+        <div class="container">
+          
+              <%= yield %>
+
+        </div>
+        
       </div>
-      <%#= render 'layouts/navigation/footer' %>
+      <%= render 'layouts/navigation/footer' %>
     </div>
   </body>
 </html>
