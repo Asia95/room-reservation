@@ -1,0 +1,7 @@
+ <%= render 'form', reservation: @reservation %>
+  <% if !@reservations.empty? %>
+    <%= render 'show' %>
+  <% else %>
+    <p>No current reservations</p>
+  <% end %>
+  

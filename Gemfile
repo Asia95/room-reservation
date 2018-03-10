@@ -42,9 +42,14 @@ gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-
+gem 'kaminari'
+gem 'jquery-turbolinks'
+gem 'rails-assets-jquery', source: 'http://insecure.rails-assets.org'
+gem 'rails-assets-datatables', source: 'http://insecure.rails-assets.org'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+gem 'validates_timeliness'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

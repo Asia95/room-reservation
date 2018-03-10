@@ -5,40 +5,36 @@ Room Reservation App
   <nav class="navbar navbar-static-top" role="navigation">
     <div class="navbar-custom-menu">
       <ul class="nav navbar-nav">
-        <li class="dropdown user user-menu">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <img alt="User Image" class="user-image" src="http://placehold.it/160x160" />
-          <span class="hidden-xs">Alexander Pierce</span>
-          </a>
-          <ul class="dropdown-menu">
-            <li class="user-header">
-              <img class="img-circle" alt="User Image" src="http://placehold.it/160x160"> </img>
-              <p>
-                Alexander Pierce - Web Developer
-                <small>Member since Nov. 2012</small>
-              </p>
-            </li>
-            <li class="user-body">
-              <div class="col-xs-4 text-center">
-                <a href="#"> Followers</a>
-              </div>
-              <div class="col-xs-4 text-center">
-                <a href="#"> Sales</a>
-              </div>
-              <div class="col-xs-4 text-center">
-                <a href="#"> Friends</a>
-              </div>
-            </li>
-            <li class="user-footer">
-              <div class="pull-left">
-                <a class="btn btn-default btn-flat" href="#"> Profile</a>
-              </div>
-              <div class="pull-right">
-                <a class="btn btn-default btn-flat" href="#"> Sign out</a>
-              </div>
-            </li>
-          </ul>
-        </li>
+        <% if current_user.present? %>
+          <li class="dropdown user user-menu">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <img alt="User Image" class="user-image" src="http://placehold.it/160x160" />
+            <span class="hidden-xs"><%= current_user.email %></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="user-header">
+                <img class="img-circle" alt="User Image" src="http://placehold.it/160x160"> </img>
+                <p>
+                  <%= current_user.email %>
+                  <small><%= current_user.remember_created_at %></small>
+                </p>
+              </li>
+              <li class="user-body">
+                <div class="text-center">
+                  <a href="#"> My reservations </a>
+                </div>
+              </li>
+              <li class="user-footer">
+                <div class="pull-left">
+                  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link btn btn-default btn-flat' %>
+                </div>
+                <div class="pull-right">
+                  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link btn btn-default btn-flat'  %>
+                </div>
+              </li>
+            </ul>
+          </li>
+        <% end %>
       </ul>
     </div>
   </nav>

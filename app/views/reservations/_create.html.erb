@@ -1,0 +1,128 @@
+<h1>Make Reservation</h1>
+<%= form_with model: @reservation, local: true, :url => {:action => "create", :controller => "reservation"} , :html => { :method => "post"} do | f | %>
+  
+  <% if @reservation.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@reservation.errors.count, "error") %> prohibited this reservation from being saved:</h2>
+
+        <ul>
+        <% @reservation.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+      <table id="make_reservation" class="table table-striped" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Room</th>
+            <th>Capacity</th>
+            <th>Reserve From</th>
+            <th>To</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td><%= f.select "choosen_room", options_from_collection_for_select(@rooms, "id", "name"), class: '' %></td>
+              <td>30</td>
+              <td>
+                <div class="input-group datepicker">
+                  <%= f.text_field :start_date, :required => true, 'start_date' => 'datetimepicker', class: 'form-control' %>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+                </div>
+              </td>
+              <td>
+                <div class="input-group datepicker">
+                  <%= f.text_field :end_date, :required => true, 'end_date' => 'datetimepicker2', class: 'form-control' %>
+                  <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+                </div>
+              </td>
+              <td><%= f.submit 'Reserve', class: 'btn btn-primary' %></td>
+            </tr>
+        </tbody>
+      </table>
+  <!--div class="row justify-content-md-center align-items-center">
+    <form class="form-inline">
+      <label class="col-1">Room:</label>
+      <%= f.select "choosen_room", options_from_collection_for_select(@rooms, "id", "name"), class: '' %>
+      <label class="">Capacity:</label>
+      <label class="">Reserve From:</label>
+      <%= f.text_field :start_date, 'start_date' => 'datetimepicker', class: 'glyphicon glyphicon-date' %>
+      <label class="">To:</label>
+      <%= f.text_field :end_date, 'end_date' => 'datetimepicker2', class: 'glyphicon glyphicon-time' %>
+
+      
+
+      <%#= link_to 'Reserve', create_reservation_path, method: :post %>
+      <%#= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%= f.submit 'Reserve', class: 'btn btn-primary' %>
+    </form>
+  </div-->  
+<% end %>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('[start_date~=datetimepicker]')
+    .datetimepicker({ minDate: new Date(), format: 'YYYY-MM-DD HH:mm' })
+    .on('changeDate', function(e) {
+              // Revalidate the start date field
+              $('reservation').formValidation('revalidateField', 'start_date');
+          });;
+
+    $('[end_date~=datetimepicker2]')
+    .datetimepicker({format: 'HH:mm'})
+    .on('changeDate', function(e) {
+              $('reservation').formValidation('revalidateField', 'end_date');
+          });
+
+    $('reservation')
+        .formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                start_date: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The start date is required'
+                        },
+                        date: {
+                            format: 'YYYY-MM-DD HH:mm',
+                            message: 'The start date is not a valid'
+                        }
+                    }
+                },
+                end_date: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The end date is required'
+                        },
+                        date: {
+                            format: 'HH:mm',
+                            message: 'The end date is not a valid'
+                        }
+                    }
+                }
+            }
+        })
+        .on('success.field.fv', function(e, data) {
+            if (data.field === 'start_date' && !data.fv.isValidField('end_date')) {
+                // We need to revalidate the end date
+                data.fv.revalidateField('end_date');
+            }
+
+            if (data.field === 'end_date' && !data.fv.isValidField('start_date')) {
+                // We need to revalidate the start date
+                data.fv.revalidateField('start_date');
+            }
+        });
+});
+</script>

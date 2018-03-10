@@ -12,15 +12,12 @@
   <body class="sidebar-collapse skin-blue-light">
     <div class="wrapper">  
       <%= render 'layouts/navigation/layout'%>    
-      <div class="content-wrapper">
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
+      <div class="content-wrapper">       
         <div class="container">
-          
-              <%= yield %>
-
-        </div>
-        
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+            <%= yield %>
+        </div>        
       </div>
       <%= render 'layouts/navigation/footer' %>
     </div>

@@ -1,0 +1,29 @@
+<h1>Reservations</h1>
+
+<table id="reservations" class="table table-bordered table-striped" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Room</th>
+      <th>Capacity</th>
+      <th>Reserved From</th>
+      <th>Reserved To</th>
+    </tr>
+  </thead>
+  <tbody>
+   
+    <% @reservations.order(start_date: :asc).each do |reserv| %>
+      <tr>
+        <td><%= reserv.room.name %></td>
+        <td><%= reserv.room.capacity %></td>
+        <td><%= reserv.start_date %></td>
+        <td><%= reserv.end_date %></td>
+      </tr>
+    <% end %>
+  
+  </tbody>
+</table>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#reservations').DataTable();
+} );
+</script>
