@@ -18,6 +18,11 @@ class UsersController < ApplicationController
 
   end
 
+  def reservations
+    @user_reservations = Reservation.all
+    @user_reservations = @user_reservations.where(user_id: current_user.id)
+  end
+
   # # PATCH/PUT /users/1
   # # PATCH/PUT /users/1.json
   def update

@@ -1,0 +1,7 @@
+  <% if !@user_reservations.empty? %>
+    <h1>Your Reservations</h1>
+    <%= render 'reservations/show', reservation: @reservations = @user_reservations %>
+  <% else %>
+    <p>No current reservations</p>
+  <% end %>
+  

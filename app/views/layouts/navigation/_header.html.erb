@@ -1,7 +1,5 @@
 <header class="main-header">
-  <a class="logo" href="/">
-Room Reservation App
-</a>
+  <%= link_to 'Room Reservations', root_url, class: 'logo' %>
   <nav class="navbar navbar-static-top" role="navigation">
     <div class="navbar-custom-menu">
       <ul class="nav navbar-nav">
@@ -21,7 +19,7 @@ Room Reservation App
               </li>
               <li class="user-body">
                 <div class="text-center">
-                  <a href="#"> My reservations </a>
+                  <%= link_to 'My reservations', reservations_user_path, :class => 'navbar-link btn btn-default btn-flat' %>
                 </div>
               </li>
               <li class="user-footer">

@@ -9,11 +9,6 @@ class ReservationsController < ApplicationController
   end
 
   def show
-    @reservations = Reservation.all
-    
-    respond_to do |format|
-      format.json { render json: @reservations }
-    end
   end
 
   def new
@@ -53,6 +48,12 @@ class ReservationsController < ApplicationController
   end
 
   def destroy
+    @reservations = Reservation.all
+    @reservations.find(params[:id]).destroy
+    respond_to do |format|
+      format.html { redirect_to root_url, notice: 'Reservation was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
 end

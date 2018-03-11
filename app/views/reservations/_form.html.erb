@@ -1,5 +1,5 @@
 <h1>Make Reservation</h1>
-<%= form_with model: reservation, local: true, :url => {:action => "create", :controller => "reservation"} , :html => { :method => "post"} do | f | %>
+<%= form_with model: reservation, local: true, :url => {:action => "create", :controller => "reservations"} , :html => { :method => "post"} do | f | %>
   
   <% if reservation.errors.any? %>
       <div id="error_explanation">
