@@ -3,18 +3,24 @@ require 'date'
 
 RSpec.describe Reservation, :type => :model do
 
-  let(:user) { User.new(:email => "asia@test.pl", :password => "secret") }
-  let(:room) { Room.new(:name => "1", :capacity => "20") }
-  subject { described_class.new(start_date: DateTime.parse("2018-10-03 11:00"),
-    end_date: DateTime.parse("2018-10-03 13:00"),
-    user: user, room: room) }
+  before(:all) do
+    #@user = create(:user)
+    #@room = create(:room)
+    @reservation = create(:reservation)
+  end
+  # let(:user) { User.new(:email => "asia@test.pl", :password => "secret") }
+  # let(:room) { Room.new(:name => "1", :capacity => "20") }
+  # subject { described_class.new(start_date: DateTime.parse("2018-10-03 11:00"),
+  #   end_date: DateTime.parse("2018-10-03 13:00"),
+  #   user: user, room: room) }
 
   describe "Validations" do
     it "is valid with valid attributes" do 
-      expect(subject).to be_valid
+      expect(@reservation).to be_valid
     end
 
     it "has end date after start date" do
+      reservation
       subject.end_date = subject.start_date - 1.hours
       expect(subject).to_not be_valid
     end
