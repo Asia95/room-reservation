@@ -8,7 +8,7 @@ RSpec.describe Room, type: :model do
 
   describe "Validations" do
     it "is valid with valid attributes" do
-      expect(FactoryBot.create(:room)).to be_valid
+      expect(FactoryBot.build(:room)).to be_valid
     end
 
     it "is not valid without a name" do

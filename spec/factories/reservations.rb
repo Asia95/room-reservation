@@ -1,21 +1,6 @@
 require 'date'
 
 FactoryBot.define do
-  
-
-  sequence :name do |n|
-    "#{n}"
-  end
-
-  factory :user do
-    sequence(:email) { |n| "asia#{n}@test.pl" }
-    password "secret"
-  end
-
-  factory :room do
-    name
-    capacity 20
-  end
 
   factory :reservation do
     user

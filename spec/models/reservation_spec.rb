@@ -6,7 +6,7 @@ RSpec.describe Reservation, :type => :model do
   before(:all) do
     #@user = create(:user)
     #@room = create(:room)
-    @reservation = create(:reservation)
+    @reservation = build(:reservation)
   end
   # let(:user) { User.new(:email => "asia@test.pl", :password => "secret") }
   # let(:room) { Room.new(:name => "1", :capacity => "20") }
@@ -20,9 +20,9 @@ RSpec.describe Reservation, :type => :model do
     end
 
     it "has end date after start date" do
-      reservation
-      subject.end_date = subject.start_date - 1.hours
-      expect(subject).to_not be_valid
+      reservation2 = build(:reservation)
+      reservation2.end_date = @reservation.start_date - 1.hours
+      expect(reservation2).to_not be_valid
     end
   end
 

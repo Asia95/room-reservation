@@ -8,9 +8,7 @@ RSpec.describe User, :type => :model do
   # end
 
   describe "Validations" do
-    it "is valid with valid attributes" do
-      expect(FactoryBot.build(:user)).to be_valid
-    end
+    
 
     it "is not valid without a password" do
       #subject.password = nil
@@ -24,10 +22,19 @@ RSpec.describe User, :type => :model do
     end
 
     it "has an unique email" do
-      #user2 = FactoryBot.create(:user)
+      #user2 = FactoryBot.build(:user)
       user2 = FactoryBot.build(:user)
       expect(FactoryBot.build(:user, email: user2.email)).to_not be_valid
     end
+
+    it "is valid with valid attributes" do
+      expect(FactoryBot.build(:user)).to be_valid
+    end
+  end
+
+  describe User do
+    it { is_expected.to validate_presence_of(:email) }
+    it { is_expected.to validate_presence_of(:password) }
   end
 
 end
