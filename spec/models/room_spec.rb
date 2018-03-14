@@ -22,8 +22,8 @@ RSpec.describe Room, type: :model do
     end
 
     it "has a unique name" do
-      room2 = build(:room, name: "1")
-      expect(room2).to_not be_valid
+      room2 = create(:room, name: "1")
+      expect(FactoryBot.build(:room, name: room2.name)).to_not be_valid
     end
   end
 end

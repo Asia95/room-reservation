@@ -23,12 +23,12 @@ RSpec.describe User, :type => :model do
 
     it "has an unique email" do
       #user2 = FactoryBot.build(:user)
-      user2 = FactoryBot.build(:user)
-      expect(FactoryBot.build(:user, email: user2.email)).to_not be_valid
+      user2 = create(:user)
+      expect(build(:user, email: user2.email)).to_not be_valid
     end
 
     it "is valid with valid attributes" do
-      expect(FactoryBot.build(:user)).to be_valid
+      expect(build(:user)).to be_valid
     end
   end
 
