@@ -16,3 +16,10 @@ Room.create!( name: '8', capacity: 30 )
 Room.create!( name: '9', capacity: 30 )
 Room.create!( name: '10', capacity: 30 )
 Room.create!( name: '11', capacity: 30 )
+
+admin = User.new({ :email => 'admin@example.com', 
+          :password => 'password', 
+          :password_confirmation => 'password',
+          :admin => true})
+admin.skip_confirmation!
+admin.save
