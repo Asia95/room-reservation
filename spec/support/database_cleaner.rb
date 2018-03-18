@@ -1,10 +1,11 @@
+require 'database_cleaner'
 RSpec.configure do |config|
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
   end
 
-  config.before(:each) do
+  config.before(:each, :clean_database_with_truncation) do
     DatabaseCleaner.strategy = :transaction
   end
 

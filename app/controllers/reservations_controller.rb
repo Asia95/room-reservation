@@ -28,7 +28,7 @@ class ReservationsController < ApplicationController
     @reservation.start_date = DateTime.parse(params[:reservation][:start_date])
 
     
-    puts "--------------------- #{@reservation.end_date}"
+    puts "--------------------- #{@reservation.start_date}"
     reserv = Time.parse(params[:reservation][:end_date])
     puts "--------------------- #{reserv}"
     tmp = @reservation.start_date.to_date + reserv.seconds_since_midnight.seconds
@@ -54,6 +54,12 @@ class ReservationsController < ApplicationController
       format.html { redirect_to root_url, notice: 'Reservation was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def reservation_params
+    params.require(:reservation).permit(:start_date, :end_date)
   end
 
 end
