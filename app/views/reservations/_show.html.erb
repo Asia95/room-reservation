@@ -17,7 +17,7 @@
         <td><%= reserv.start_date %></td>
         <td><%= reserv.end_date %></td>
         <% if reserv.user_id == current_user.id %>
-          <td><%= link_to 'Delete', reserv, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary' %></td>
+          <td><%= link_to 'Delete', reserv, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary', remote: true %></td>
         <% else %>
           <td><%= link_to 'Delete', reserv, method: :delete, class: 'btn btn-primary disabled' %></td>
         <% end %>

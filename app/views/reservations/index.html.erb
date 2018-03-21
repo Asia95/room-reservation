@@ -1,8 +1,12 @@
  <%= render 'form', reservation: @reservation %>
+<div id="reservation">
   <% if !@reservations.empty? %>
     <h1>Reservations</h1>
-    <%= render 'show', reservation: @reservations %>
+ 
+      <%= render 'show', reservation: @reservations %>
+
   <% else %>
     <p>No current reservations</p>
   <% end %>
+</div>
   

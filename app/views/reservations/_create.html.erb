@@ -72,10 +72,13 @@
     .on('changeDate', function(e) {
               // Revalidate the start date field
               $('reservation').formValidation('revalidateField', 'start_date');
-          });;
+              var min_date = $(this).datetimepicker('getDate') || new Date();
+              min_date = min_date.getTime();
+              $('[end_date~=datetimepicker2]').datetimepicker({ minDate: min_date });
+          });
 
     $('[end_date~=datetimepicker2]')
-    .datetimepicker({format: 'HH:mm'})
+    .datetimepicker({ minDate: min_date, format: 'HH:mm' })
     .on('changeDate', function(e) {
               $('reservation').formValidation('revalidateField', 'end_date');
           });

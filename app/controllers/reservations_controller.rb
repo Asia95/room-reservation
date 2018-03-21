@@ -26,10 +26,12 @@ class ReservationsController < ApplicationController
 
     reserv_end_date = Time.parse(params[:reservation][:end_date])
     @reservation.end_date = @reservation.start_date.to_date + reserv_end_date.seconds_since_midnight.seconds
+    @reservations = Reservation.where("start_date >= :date", { date: DateTime.now })
 
     respond_to do |format|
       if @reservation.save
         format.html { redirect_to root_url, notice: 'Room was successfully reserved.' }
+        format.js { flash[:notice] = 'Room was successfully reserved.' }
         format.json { render :show, status: :created, location: @room }
       else
         format.html { render :index }
@@ -41,8 +43,10 @@ class ReservationsController < ApplicationController
   def destroy
     @reservations = Reservation.all
     @reservations.find(params[:id]).destroy
+    @reservations = Reservation.where("start_date >= :date", { date: DateTime.now })
     respond_to do |format|
-      format.html { redirect_to root_url, notice: 'Reservation was successfully destroyed.' }
+      format.html { redirect_to root_url, notice: 'Reservation was deleted.' }
+      format.js { flash[:notice] = 'Reservation was deleted.' }
       format.json { head :no_content }
     end
   end
