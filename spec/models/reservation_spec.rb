@@ -37,4 +37,28 @@ RSpec.describe Reservation, :type => :model do
       expect(assc.macro).to eq :belongs_to
     end
   end
+
+  describe "Public access to reservations", type: :request do
+    it "denies access to reservation#index" do
+      get reservations_path
+      expect(response).to redirect_to new_user_session_path
+    end
+
+    it "denies access to reservation#create" do
+
+      params = {
+        reservation: {
+          choosen_room: @reservation.room.name,
+          start_date: DateTime.now + 1.hours,
+          end_date: DateTime.now + 2.hours,
+        }
+      }
+
+      expect {
+        post '/reservations'
+      }.to_not change(Reservation, :count)
+
+      expect(response).to redirect_to new_user_session_path
+    end
+  end
 end

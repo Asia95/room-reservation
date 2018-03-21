@@ -37,21 +37,21 @@ class RoomsController < ApplicationController
     end
   end
 
-  # POST /rooms/1/reserve
-  # POST /rooms/1/reserve.json
-  def reserve
-    @reservation = Reservation.new
-    @reservation.user = current_user
-    @reservation.room = @room
-    @reservation.date = params[:date]
-    if @reservation.save
-      format.html { redirect_to root_path, notice: 'Room was successfully reserved.' }
-      format.json { render :show, status: :created, location: @room }
-    else
-      format.html { render :new }
-      format.json { render json: @room.errors, status: :unprocessable_entity }
-    end    
-  end
+  # # POST /rooms/1/reserve
+  # # POST /rooms/1/reserve.json
+  # def reserve
+  #   @reservation = Reservation.new
+  #   @reservation.user = current_user
+  #   @reservation.room = @room
+  #   @reservation.date = params[:date]
+  #   if @reservation.save
+  #     format.html { redirect_to root_path, notice: 'Room was successfully reserved.' }
+  #     format.json { render :show, status: :created, location: @room }
+  #   else
+  #     format.html { render :new }
+  #     format.json { render json: @room.errors, status: :unprocessable_entity }
+  #   end    
+  # end
 
   # PATCH/PUT /rooms/1
   # PATCH/PUT /rooms/1.json

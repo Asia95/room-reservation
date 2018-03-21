@@ -4,7 +4,7 @@ class ReservationsController < ApplicationController
 
   def index
     @rooms = Room.all
-    @reservations = Reservation.all
+    @reservations = Reservation.where("start_date >= :date", { date: DateTime.now })
     @reservation = Reservation.new
   end
 
@@ -12,30 +12,21 @@ class ReservationsController < ApplicationController
   end
 
   def new
-    @rooms = Room.all
-    @reservation = Reservation.new
-    @reservations = Reservation.all
+    #@reservation = Reservation.new
   end
 
   def create
-    @rooms = Room.all
-    @reservations = Reservation.all
-
     @reservation = Reservation.new
     @reservation.user = current_user
-    puts "================= #{params[:reservation][:end_date]}"
-    @reservation.room = @rooms.find(params[:reservation][:choosen_room])
+    @reservation.room = Room.find(params[:reservation][:choosen_room])
     @reservation.start_date = DateTime.parse(params[:reservation][:start_date])
 
-    
     puts "--------------------- #{@reservation.start_date}"
-    reserv = Time.parse(params[:reservation][:end_date])
-    puts "--------------------- #{reserv}"
-    tmp = @reservation.start_date.to_date + reserv.seconds_since_midnight.seconds
-    puts "[[[[[[[[[[[[[[[[[[[[[[[[[[[ #{tmp}"
-    @reservation.end_date = @reservation.start_date.to_date + reserv.seconds_since_midnight.seconds
-    puts "============== #{@reservation.end_date}"
-    puts "============== #{reserv}"
+    puts "===================== #{params[:reservation][:end_date]}"
+
+    reserv_end_date = Time.parse(params[:reservation][:end_date])
+    @reservation.end_date = @reservation.start_date.to_date + reserv_end_date.seconds_since_midnight.seconds
+
     respond_to do |format|
       if @reservation.save
         format.html { redirect_to root_url, notice: 'Room was successfully reserved.' }
