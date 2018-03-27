@@ -17,6 +17,7 @@
 //= require jquery.dataTables.min.js
 //= require datatables
 //= require turbolinks
+//= require toastr_rails
 //= require bootstrap
 //= require bootstrap-sprockets
 //= require moment

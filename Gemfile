@@ -5,12 +5,18 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+#ruby '2.3.3', :engine => 'jruby', :engine_version => '9.1.16.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.5'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
+# group :development, :production do
+#   gem 'pg'
+# end
 gem 'pg'
+#gem 'activerecord-jdbcpostgresql-adapter'
+gem 'rails_12factor'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
@@ -35,7 +41,7 @@ gem 'bcrypt', git: 'https://github.com/codahale/bcrypt-ruby.git', :require => 'b
 
 gem 'devise'
 
-
+gem 'toastr_rails'
 gem 'bootstrap-sass'
 #gem 'autopprefixer-rails'
 gem 'momentjs-rails'

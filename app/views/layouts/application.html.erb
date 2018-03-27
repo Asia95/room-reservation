@@ -14,8 +14,14 @@
       <%= render 'layouts/navigation/layout'%>    
       <div class="content-wrapper">
         <div class="container">
-          <p class="notice"><%= notice %></p>
-          <p class="alert"><%= alert %></p>
+          <% unless flash.empty? %>
+            <script type="text/javascript">
+                <% flash.each do |f| %>
+              <% type = f[0].gsub('alert', 'error').gsub('notice', 'info') %>
+                    toastr['<%= (type == 'danger' ? 'error' : type) %>']('<%= f[1] %>', '<%= type %>');
+                <% end %>
+            </script>
+          <% end %>
             <%= yield %>
         </div>        
       </div>

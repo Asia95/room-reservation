@@ -40,6 +40,6 @@ feature "Delete reservation" do
       find_link('Delete').click
     end
     
-    expect(page).to have_content 'Reservation was successfully destroyed.'
+    expect(page).to have_content 'Reservation was deleted.'
   end
 end

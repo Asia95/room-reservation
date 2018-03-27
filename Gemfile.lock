@@ -75,6 +75,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
+    concurrent-ruby (1.0.5-java)
     crass (1.0.3)
     database_cleaner (1.6.2)
     devise (4.4.3)
@@ -94,6 +95,7 @@ GEM
       railties (>= 3.0.0)
     faker (1.8.7)
       i18n (>= 0.7)
+    ffi (1.9.23-java)
     ffi (1.9.23-x86-mingw32)
     font-awesome-rails (4.7.0.3)
       railties (>= 3.2, < 5.2)
@@ -117,6 +119,7 @@ GEM
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
     json (2.1.0)
+    json (2.1.0-java)
     kaminari (1.1.1)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.1.1)
@@ -143,12 +146,16 @@ GEM
     multi_json (1.13.1)
     nested_form (0.3.2)
     nio4r (2.3.0)
+    nio4r (2.3.0-java)
+    nokogiri (1.8.2-java)
     nokogiri (1.8.2-x86-mingw32)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
+    pg (1.0.0)
     pg (1.0.0-x86-mingw32)
     public_suffix (3.0.2)
     puma (3.11.3)
+    puma (3.11.3-java)
     rack (2.0.4)
     rack-pjax (1.0.0)
       nokogiri (~> 1.5)
@@ -175,6 +182,9 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
+    rails_12factor (0.0.3)
+      rails_serve_static_assets
+      rails_stdout_logging
     rails_admin (1.3.0)
       builder (~> 3.1)
       coffee-rails (~> 4.0)
@@ -188,6 +198,8 @@ GEM
       rails (>= 4.0, < 6)
       remotipart (~> 1.3)
       sass-rails (>= 4.0, < 6)
+    rails_serve_static_assets (0.0.5)
+    rails_stdout_logging (0.0.5)
     railties (5.1.5)
       actionpack (= 5.1.5)
       activesupport (= 5.1.5)
@@ -251,8 +263,10 @@ GEM
     temple (0.8.0)
     thor (0.20.0)
     thread_safe (0.3.6)
+    thread_safe (0.3.6-java)
     tilt (2.0.8)
     timeliness (0.3.8)
+    toastr_rails (2.1.3)
     turbolinks (5.1.0)
       turbolinks-source (~> 5.1)
     turbolinks-source (5.1.0)
@@ -273,11 +287,14 @@ GEM
       railties (>= 5.0)
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
+    websocket-driver (0.6.5-java)
+      websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
     xpath (3.0.0)
       nokogiri (~> 1.8)
 
 PLATFORMS
+  java
   x86-mingw32
 
 DEPENDENCIES
@@ -302,12 +319,14 @@ DEPENDENCIES
   rails (~> 5.1.5)
   rails-assets-datatables!
   rails-assets-jquery!
+  rails_12factor
   rails_admin (~> 1.3)
   rspec-rails
   sass-rails (~> 5.0)
   selenium-webdriver
   shoulda-matchers
   simplecov
+  toastr_rails
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)
@@ -315,4 +334,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.16.0
+   1.16.1
