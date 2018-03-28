@@ -3,6 +3,7 @@ class ReservationsController < ApplicationController
   require 'time'
 
   def index
+    @only_user_reservations = helpers.check_if_only_user_reservations
     @rooms = Room.all
     @reservations = Reservation.recent
     @reservation = Reservation.new
@@ -45,7 +46,16 @@ class ReservationsController < ApplicationController
   def destroy
     @reservations = Reservation.all
     @reservations.find(params[:id]).destroy
-    @reservations = Reservation.recent
+
+    # Check from where the request came
+    @only_user_reservations = helpers.check_if_only_user_reservations
+    if @only_user_reservations
+      @reservations = Reservation.recent.where(user_id: current_user.id)
+      puts "-------------------------------- #{request.path}"
+    else
+      @reservations = Reservation.recent
+      puts "-------------------------------- #{request.path}"
+    end
     respond_to do |format|
       flash[:success] = 'Reservation was deleted.'
       format.html { redirect_to root_url }

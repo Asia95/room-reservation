@@ -19,8 +19,10 @@ class UsersController < ApplicationController
   end
 
   def reservations
-    #@user_reservations = Reservation.all
-    @user_reservations = Reservation.where(user_id: current_user.id)
+    @only_user_reservations = helpers.check_if_only_user_reservations
+    # @user_reservations = Reservation.all
+    @user_reservations = Reservation.recent.where(user_id: current_user.id)
+    # puts "======================================= #{@user_reservations}"
   end
 
   # # PATCH/PUT /users/1

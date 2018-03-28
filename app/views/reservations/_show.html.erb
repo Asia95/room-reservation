@@ -1,10 +1,7 @@
-<% unless flash.empty? %>
-    <script type="text/javascript">
-        <% flash.each do |f| %>
-      <% type = f[0].gsub('alert', 'error').gsub('notice', 'info') %>
-            toastr['<%= (type == 'danger' ? 'error' : type) %>']('<%= f[1] %>', '<%= type %>');
-        <% end %>
-    </script>
+<% if @only_user_reservations == true %>
+  <h1>Your Reservations</h1>
+<% else %>
+  <h1>Reservations</h1>
 <% end %>
 <table id="reservations" class="table table-bordered table-striped" >
   <thead>
