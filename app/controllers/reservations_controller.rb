@@ -29,15 +29,24 @@ class ReservationsController < ApplicationController
     @reservation.end_date = @reservation.start_date.to_date + reserv_end_date.seconds_since_midnight.seconds
     @reservations = Reservation.recent
 
+    # chceck if okk
+    if !@reservations.empty?
+      room_reservations = @reservations.where("room_id = ? AND end_date > ?", @reservation.room, @reservation.start_date)
+    end
     respond_to do |format|
-      if @reservation.save
-        
-        format.html { redirect_to root_url }
-        format.js { flash[:success] = 'Room was successfully reserved.' }
-        format.json { render :show, status: :created, location: @room }
+      if room_reservations.empty?
+        if @reservation.save          
+          format.html { redirect_to root_url }
+          format.js { flash.now[:success] = 'Room was successfully reserved1.' }
+          format.json { render :show, status: :created, location: @room }
+        else
+          flash.now[:danger] = 'Room cannot be reserved.'
+          format.html { render :index }
+          format.json { render json: @room.errors, status: :unprocessable_entity }
+        end
       else
-        flash[:danger] = 'Room cannot be reserved.'
         format.html { render :index }
+        format.js { flash.now[:danger] = 'Room is reserved at this time1.' }
         format.json { render json: @room.errors, status: :unprocessable_entity }
       end
     end 
@@ -57,7 +66,7 @@ class ReservationsController < ApplicationController
       puts "-------------------------------- #{request.path}"
     end
     respond_to do |format|
-      flash[:success] = 'Reservation was deleted.'
+      flash.now[:success] = 'Reservation was deleted.'
       format.html { redirect_to root_url }
       format.js {  }
       format.json { head :no_content }
