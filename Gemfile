@@ -43,6 +43,7 @@ gem 'devise'
 
 gem 'toastr_rails'
 gem 'bootstrap-sass'
+gem 'bootstrap_form'
 #gem 'autopprefixer-rails'
 gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'

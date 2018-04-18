@@ -1,13 +1,6 @@
- <%= render 'form', reservation: @reservation %>
+<%= render 'form', reservation: @reservation %>
 <div id="notice"></div>
 <div id="reservation">
-  <% if !@reservations.empty? %>
-    
- 
-      <%= render 'show', reservation: @reservations %>
-
-  <% else %>
-    <p>No current reservations</p>
-  <% end %>
+  <%= render all_reservations_show_partial_path(@reservations) %>
 </div>
   

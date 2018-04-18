@@ -1,2 +1,2 @@
-$('#reservation').html("<%= escape_javascript render partial: 'show' %>");
+$('#reservation').html("<%= escape_javascript render all_reservations_show_partial_path(@reservations) %>");
 $('#notice').html("<%= escape_javascript render partial: 'notice' %>");

@@ -3,7 +3,6 @@ class ReservationsController < ApplicationController
   require 'time'
 
   def index
-    @only_user_reservations = helpers.check_if_only_user_reservations
     @rooms = Room.all
     @reservations = Reservation.recent
     @reservation = Reservation.new
@@ -37,7 +36,7 @@ class ReservationsController < ApplicationController
       if room_reservations.empty?
         if @reservation.save          
           format.html { redirect_to root_url }
-          format.js { flash.now[:success] = 'Room was successfully reserved1.' }
+          format.js { flash.now[:success] = 'Room was successfully reserved.' }
           format.json { render :show, status: :created, location: @room }
         else
           flash.now[:danger] = 'Room cannot be reserved.'
@@ -46,7 +45,7 @@ class ReservationsController < ApplicationController
         end
       else
         format.html { render :index }
-        format.js { flash.now[:danger] = 'Room is reserved at this time1.' }
+        format.js { flash.now[:danger] = 'Room is reserved at this time.' }
         format.json { render json: @room.errors, status: :unprocessable_entity }
       end
     end 
@@ -55,20 +54,15 @@ class ReservationsController < ApplicationController
   def destroy
     @reservations = Reservation.all
     @reservations.find(params[:id]).destroy
+    @reservations = Reservation.recent
 
-    # Check from where the request came
-    @only_user_reservations = helpers.check_if_only_user_reservations
-    if @only_user_reservations
-      @reservations = Reservation.recent.where(user_id: current_user.id)
-      puts "-------------------------------- #{request.path}"
-    else
-      @reservations = Reservation.recent
-      puts "-------------------------------- #{request.path}"
-    end
+    # Check if show all reservations or just user reservations
+    @reservations = helpers.get_all_or_just_user_reservations
+    
     respond_to do |format|
       flash.now[:success] = 'Reservation was deleted.'
-      format.html { redirect_to root_url }
-      format.js {  }
+      format.html { }
+      format.js { }
       format.json { head :no_content }
     end
   end
